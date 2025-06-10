@@ -2,7 +2,7 @@
 
 ![](./assets/gtrs.png)
 
-### [arXiv](https://arxiv.org/pdf/2506.06664) | [Challenge](https://opendrivelab.com/challenge2025/#navsim-e2e-driving)
+### [arXiv](https://arxiv.org/abs/2506.06664) | [Challenge](https://opendrivelab.com/challenge2025/#navsim-e2e-driving)
 
 
 This is the official repository of GTRS, an end-to-end planning framework featuring a robust trajectory scorer for evaluating diverse trajectory candidates.
