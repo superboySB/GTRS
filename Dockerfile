@@ -15,7 +15,7 @@ RUN git clone https://github.com/superboySB/GTRS
 WORKDIR /navsim_workspace/GTRS
 RUN /opt/conda/bin/python3 -m pip uninstall -y torch 
 RUN /opt/conda/bin/python3 -m pip install --upgrade pip
-RUN /opt/conda/bin/python3 -m pip install -r requirements.txt
+RUN /opt/conda/bin/python3 -m pip install --retries=10 --timeout=120 --no-cache-dir -r requirements.txt
 RUN /opt/conda/bin/python3 -m pip install --upgrade diffusers[torch]
 RUN /opt/conda/bin/python3 -m pip install -e .
 WORKDIR /navsim_workspace/exp
