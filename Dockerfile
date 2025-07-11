@@ -8,23 +8,18 @@ ENV http_proxy=http://127.0.0.1:8889
 ENV https_proxy=http://127.0.0.1:8889
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git tmux vim gedit
+    git tmux vim gedit curl wget libgl1 ffmpeg libpng-dev libjpeg-dev
 
-WORKDIR /workspace
+WORKDIR /navsim_workspace
+RUN git clone https://github.com/superboySB/GTRS
+WORKDIR /navsim_workspace/GTRS
+RUN /opt/conda/bin/python3 -m pip uninstall -y torch 
 RUN /opt/conda/bin/python3 -m pip install --upgrade pip
-
-COPY . /workspace/GTRS_raw
-RUN cd GTRS_raw && /opt/conda/bin/python3 -m pip install -r requirements.txt
-RUN cd GTRS_raw && /opt/conda/bin/python3 -m pip install --upgrade diffusers[torch]
-RUN cd GTRS_raw && /opt/conda/bin/python3 -m pip install -e .
-
-RUN echo 'export NUPLAN_MAP_VERSION="nuplan-maps-v1.0"' >> ~/.bashrc \
- && echo 'export NUPLAN_MAPS_ROOT="/workspace/GTRS_raw/dataset/maps"' >> ~/.bashrc \
- && echo 'export NAVSIM_EXP_ROOT="/workspace/GTRS_raw/exp"' >> ~/.bashrc \
- && echo 'export NAVSIM_DEVKIT_ROOT="/workspace/GTRS_raw"' >> ~/.bashrc \
- && echo 'export OPENSCENE_DATA_ROOT="/workspace/GTRS_raw/dataset"' >> ~/.bashrc \
- && echo 'export NAVSIM_TRAJPDM_ROOT="/workspace/GTRS_raw/dataset/traj_pdm_v2"' >> ~/.bashrc
-
+RUN /opt/conda/bin/python3 -m pip install -r requirements.txt
+RUN /opt/conda/bin/python3 -m pip install --upgrade diffusers[torch]
+RUN /opt/conda/bin/python3 -m pip install -e .
+WORKDIR /navsim_workspace/exp
+WORKDIR /navsim_workspace/dataset
 
 # -----------------------------------------------------
 RUN rm -rf /var/lib/apt/lists/* && apt-get clean
@@ -36,4 +31,4 @@ ENV MAGNUM_LOG="quiet"
 # ENV https_proxy=
 # ENV no_proxy=
 CMD ["/bin/bash"]
-WORKDIR /workspace
+WORKDIR /navsim_workspace
