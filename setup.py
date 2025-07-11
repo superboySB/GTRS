@@ -21,7 +21,7 @@ setuptools.setup(
     packages=setuptools.find_packages(script_folder),
     package_dir={"": "."},
     classifiers=[
-        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent",
         "License :: Free for non-commercial use",
     ],

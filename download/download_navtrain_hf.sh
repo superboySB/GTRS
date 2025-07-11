@@ -2,7 +2,7 @@ wget https://huggingface.co/datasets/OpenDriveLab/OpenScene/resolve/main/opensce
 tar -xzf openscene_metadata_trainval.tgz
 rm openscene_metadata_trainval.tgz
 mv openscene-v1.1/meta_datas trainval_navsim_logs
-rm -r openscene-v1.1
+# rm -r openscene-v1.1
 
 mkdir -p trainval_sensor_blobs/trainval
 for split in {1..32}; do
@@ -12,7 +12,7 @@ for split in {1..32}; do
     rm navtrain_current_${split}.tgz
 
     rsync -rv navtrain_current_${split}/* trainval_sensor_blobs/trainval
-    rm -r navtrain_current_${split}
+    # rm -r navtrain_current_${split}
 done
 
 for split in {1..32}; do
@@ -22,5 +22,5 @@ for split in {1..32}; do
     rm navtrain_history_${split}.tgz
 
     rsync -rv navtrain_history_${split}/* trainval_sensor_blobs/trainval
-    rm -r navtrain_history_${split}
+    # rm -r navtrain_history_${split}
 done

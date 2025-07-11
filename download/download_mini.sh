@@ -2,7 +2,7 @@ wget https://huggingface.co/datasets/OpenDriveLab/OpenScene/resolve/main/opensce
 tar -xzf openscene_metadata_mini.tgz
 rm openscene_metadata_mini.tgz
 mv openscene-v1.1/meta_datas mini_navsim_logs
-rm -r openscene-v1.1
+# rm -r openscene-v1.1
 
 for split in {0..31}; do
     wget https://huggingface.co/datasets/OpenDriveLab/OpenScene/resolve/main/openscene-v1.1/openscene_sensor_mini_camera/openscene_sensor_mini_camera_${split}.tgz
