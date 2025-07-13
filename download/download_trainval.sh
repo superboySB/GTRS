@@ -18,4 +18,4 @@ done
 
 mv openscene-v1.1/meta_datas trainval_navsim_logs
 mv openscene-v1.1/sensor_blobs trainval_sensor_blobs
-# rm -r openscene-v1.1
+rm -r openscene-v1.1

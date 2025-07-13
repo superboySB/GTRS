@@ -18,4 +18,4 @@ done
 
 mv openscene-v1.1/meta_datas test_navsim_logs
 mv openscene-v1.1/sensor_blobs test_sensor_blobs
-# rm -r openscene-v1.1
+rm -r openscene-v1.1
