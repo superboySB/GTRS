@@ -1,15 +1,16 @@
 # 笔记
 ## 复现过程
 ```sh
-docker build -t dzp_gtrs:test --network=host --progress=plain .
+docker build -t dzp_gtrs:0714 --network=host --progress=plain .
 
-docker run --name dzp-gtrs-test -itd --privileged --gpus all --network=host \
+docker run --name dzp-gtrs-0714 -itd --privileged --gpus all --network=host \
     -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+    -v /home/dzp/projects/GTRS/dataset:/navsim_workspace/dataset \
     -e DISPLAY=$DISPLAY \
     -e LOCAL_USER_ID="$(id -u)" \
-    dzp_gtrs:test /bin/bash
+    dzp_gtrs:0714 /bin/bash
 
-docker exec -it dzp-gtrs-test /bin/bash
+docker exec -it dzp-gtrs-0714 /bin/bash
 ```
 重整结构
 ```angular2html
