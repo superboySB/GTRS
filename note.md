@@ -1,5 +1,6 @@
 # 笔记
-## 复现过程
+## 配置过程
+注意映射dataset的位置要改
 ```sh
 docker build -t dzp_gtrs:0714 --network=host --progress=plain .
 
@@ -12,7 +13,7 @@ docker run --name dzp-gtrs-0714 -itd --privileged --gpus all --network=host \
 
 docker exec -it dzp-gtrs-0714 /bin/bash
 ```
-重整结构
+重整结构,验证阶段至少保证有`navsim_logs`和`sensor_blobs`的`test`地址。
 ```angular2html
 /navsim_workspace
 ├── GTRS (containing the devkit)
@@ -68,6 +69,8 @@ echo 'export NUPLAN_MAP_VERSION="nuplan-maps-v1.0"' >> ~/.bashrc \
  && echo 'export NAVSIM_DEVKIT_ROOT="/navsim_workspace/GTRS"' >> ~/.bashrc \
  && echo 'export OPENSCENE_DATA_ROOT="/navsim_workspace/dataset"' >> ~/.bashrc \
  && echo 'export NAVSIM_TRAJPDM_ROOT="/navsim_workspace/dataset/traj_pdm_v2"' >> ~/.bashrc
+
+source ~/.bashrc
 ```
 如果改动了源代码，需要重新安装环境
 ```sh
@@ -75,4 +78,17 @@ git clone https://github.com/superboySB/GTRS_SB
 
 cd GTRS_SB && pip install -e .
 ```
-上述环境变量和映射先一切从简吧
+上述环境变量和映射先一切从简吧.
+
+## 先看看验证集
+运行caching
+```sh
+cd $NAVSIM_DEVKIT_ROOT/scripts/
+./run_metric_caching.sh
+```
+注意相应的shell位置以及`TRAIN_TEST_SPLIT=navtest`这一行是不是要改，以下是工作流程
+```
+原始场景数据 → 场景加载 → 特征计算 → 缓存存储 → 训练/评估使用
+    ↓            ↓          ↓         ↓         ↓
+NavSim logs → SceneLoader → MetricCacheProcessor → .pkl文件 → 下游任务
+```

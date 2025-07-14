@@ -15,11 +15,11 @@ bash ./download_maps.sh
 echo "下载openscene mini数据集..."
 bash ./download_mini.sh
 
-# echo "下载openscene trainval数据集...(太大了先搁置一下，用mini先看看!!!)" 
+# echo "下载openscene trainval数据集...(太大了先搁置一下，2000G左右，用mini和test先看看!!!)" 
 # bash ./download_trainval.sh
 
-# echo "下载openscene test数据集...(太大了先搁置一下，用mini先看看!!!)"
-# bash ./download_test.sh
+echo "下载openscene test数据集..."
+bash ./download_test.sh
 
 # echo "下载warmup two stage数据集...(用于比赛)"
 # bash ./download_warmup_two_stage.sh
@@ -31,7 +31,7 @@ bash ./download_navhard_two_stage.sh
 # echo "下载private test hard two stage数据集...(用于比赛)"
 # bash ./download_private_test_hard_two_stage.sh
 
-# (trainval的复现优先用这个...)
+# (trainval的复现优先用这个...400G左右)
 # 选择一个navtrain下载方式（AWS或HuggingFace）
 echo "下载navtrain数据集（从HuggingFace）..."
 bash ./download_navtrain_hf.sh
