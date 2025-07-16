@@ -5,7 +5,7 @@
 docker build -t dzp_gtrs:0714 --network=host --progress=plain .
 
 docker run --name dzp-gtrs-0714 -itd --privileged --gpus all --network=host \
-    -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+    --shm-size=8G -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
     -v /home/dzp/projects/GTRS/dataset:/navsim_workspace/dataset \
     -e DISPLAY=$DISPLAY \
     -e LOCAL_USER_ID="$(id -u)" \
@@ -83,10 +83,10 @@ cd GTRS_SB && pip install -e .
 ## 先看看验证集
 运行caching
 ```sh
-cd $NAVSIM_DEVKIT_ROOT/scripts/
+cd $NAVSIM_DEVKIT_ROOT/scripts/evaluation
 ./run_metric_caching.sh
 ```
-注意相应的shell位置以及`TRAIN_TEST_SPLIT=navtest`这一行是不是要改，以下是工作流程
+注意相应的shell位置以及`TRAIN_TEST_SPLIT=navtest`这一行要改`navhard_two_stage`，以下是工作流程
 ```
 原始场景数据 → 场景加载 → 特征计算 → 缓存存储 → 训练/评估使用
     ↓            ↓          ↓         ↓         ↓
